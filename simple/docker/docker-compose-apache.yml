@@ -29,7 +29,7 @@ services:
         max-size: 100M
         max-file: 10
   peprr_db:
-    image: postgresql:9.5
+    image: postgres:9.5
     container_name: peprr_db
     environment:
       POSTGRES_USER: peprr
