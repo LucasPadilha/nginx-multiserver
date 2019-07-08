@@ -26,7 +26,7 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 100M
+        max-size: "100M"
         max-file: 10
   peprr_db:
     image: postgres:9.5
@@ -41,7 +41,7 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 100M
+        max-size: "100M"
         max-file: 10
 
 networks:
