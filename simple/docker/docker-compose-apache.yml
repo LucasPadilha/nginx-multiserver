@@ -1,0 +1,54 @@
+version: "3"
+services:
+  peprr_web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: peprr_web
+    environment:
+      PHINX_ENVIRONMENT: development
+      PHINX_DB_ADAPTER: pgsql
+      PHINX_DB_HOST: peprr_db
+      PHINX_DB_NAME: peprr
+      PHINX_DB_USER: peprr
+      PHINX_DB_PASS: peprr
+      PHINX_DB_PORT: 5432
+      VIRTUAL_HOST: peprr.com
+    expose:
+      - 80
+    depends_on:
+      - peprr_db
+    links:
+      - peprr_db
+    volumes:
+      - /home/sites/public/peprr.com/src/:/var/www/html/
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 100M
+        max-file: 10
+  peprr_db:
+    image: postgresql:9.5
+    container_name: peprr_db
+    environment:
+      POSTGRES_USER: peprr
+      POSTGRES_PASSWORD: peprr
+      POSTGRES_DB: peprr
+    depends_on:
+      - peprr_db
+    links:
+      - peprr_db
+    volumes:
+      - /home/sites/public/peprr.com/database/postgresql/:/var/lib/postgresql/data/
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 100M
+        max-file: 10
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
