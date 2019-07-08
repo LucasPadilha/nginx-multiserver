@@ -24,7 +24,7 @@ services:
       - /home/sites/public/peprr.com/src/:/var/www/html/
     restart: unless-stopped
     logging:
-      driver: json-file
+      driver: "json-file"
       options:
         max-size: "100M"
         max-file: 10
@@ -39,7 +39,7 @@ services:
       - /home/sites/public/peprr.com/database/postgresql/:/var/lib/postgresql/data/
     restart: unless-stopped
     logging:
-      driver: json-file
+      driver: "json-file"
       options:
         max-size: "100M"
         max-file: 10
