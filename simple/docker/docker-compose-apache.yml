@@ -35,10 +35,6 @@ services:
       POSTGRES_USER: peprr
       POSTGRES_PASSWORD: peprr
       POSTGRES_DB: peprr
-    depends_on:
-      - peprr_db
-    links:
-      - peprr_db
     volumes:
       - /home/sites/public/peprr.com/database/postgresql/:/var/lib/postgresql/data/
     restart: unless-stopped
