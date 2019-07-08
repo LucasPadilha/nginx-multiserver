@@ -27,7 +27,7 @@ services:
       driver: "json-file"
       options:
         max-size: "100M"
-        max-file: 10
+        max-file: "10"
   peprr_db:
     image: postgres:9.5
     container_name: peprr_db
@@ -42,7 +42,7 @@ services:
       driver: "json-file"
       options:
         max-size: "100M"
-        max-file: 10
+        max-file: "10"
 
 networks:
   default:
