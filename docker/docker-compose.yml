@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  nginx_proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx_proxy
+    restart: unless-stopped
+    environment:
+      DEFAULT_HOST: blacksheepstudio.com.br
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
+        max-file: "10"
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
