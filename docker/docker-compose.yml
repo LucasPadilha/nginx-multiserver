@@ -12,6 +12,7 @@ services:
       - 80:80
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
+      - ./custom.conf:/etc/nginx/conf.d/custom.conf
     logging:
       driver: "json-file"
       options:
