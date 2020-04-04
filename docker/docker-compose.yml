@@ -10,6 +10,7 @@ services:
       DEFAULT_HOST: blacksheepstudio.com.br
     ports:
       - 80:80
+      - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
       - ./custom.conf:/etc/nginx/conf.d/custom.conf
