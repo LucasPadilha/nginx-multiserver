@@ -32,9 +32,9 @@ services:
       DEFAULT_EMAIL: padilhaght+letsencrypt@gmail.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs-volume
-      - vhost-volume
-      - html-volume
+      - certs-volume:/etc/nginx/certs
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
 
 networks:
   default:
