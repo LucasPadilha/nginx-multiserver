@@ -12,15 +12,35 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./custom.conf:/etc/nginx/conf.d/custom.conf
+      - certs-volume:/etc/nginx/certs
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
     logging:
       driver: "json-file"
       options:
         max-size: "100M"
         max-file: "10"
+  
+  nginx_letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx_letsencrypt
+    restart: unless-stopped
+    environment:
+      DEFAULT_EMAIL: padilhaght+letsencrypt@gmail.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs-volume:/etc/nginx/certs
+      - vhost-volume:/etc/nginx/vhost.d
+      - html-volume:/usr/share/nginx/html
 
 networks:
   default:
     external:
       name: nginx-proxy
+
+volumes:
+  certs-volume:
+  vhost-volume:
+  html-volume:
